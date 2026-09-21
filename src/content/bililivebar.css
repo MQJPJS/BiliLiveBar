@@ -1,0 +1,1118 @@
+#bililivebar-storage-frame {
+  display: none !important;
+}
+
+.bililivebar-diagnostic-output {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 150px;
+  color: #dce3ed;
+  background: #151821;
+  border: 1px solid #3b4252;
+  border-radius: 6px;
+  font: 11px/1.5 Consolas, monospace;
+}
+
+html.bililivebar-native-danmaku-hidden .web-player-danmaku,
+html.bililivebar-native-danmaku-hidden .bilibili-live-player-video-danmaku,
+html.bililivebar-native-danmaku-hidden .bili-danmaku-x-container,
+html.bililivebar-native-danmaku-hidden [data-e2e="danmaku-container"],
+html.bililivebar-native-danmaku-hidden canvas.danmaku-screen,
+html.bililivebar-native-danmaku-hidden [class~="danmaku-screen"],
+:host(.bililivebar-native-danmaku-hidden) .web-player-danmaku,
+:host(.bililivebar-native-danmaku-hidden) .bilibili-live-player-video-danmaku,
+:host(.bililivebar-native-danmaku-hidden) .bili-danmaku-x-container,
+:host(.bililivebar-native-danmaku-hidden) [data-e2e="danmaku-container"],
+:host(.bililivebar-native-danmaku-hidden) canvas.danmaku-screen,
+:host(.bililivebar-native-danmaku-hidden) [class~="danmaku-screen"] {
+  visibility: hidden !important;
+}
+
+.bililivebar-replay-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 11 !important;
+  display: none;
+  overflow: hidden;
+  background: #000;
+  pointer-events: none;
+}
+
+.bililivebar-replay-layer.is-active {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.bililivebar-replay-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+  pointer-events: none;
+}
+
+.bililivebar-danmaku-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout paint;
+}
+
+.bililivebar-danmaku {
+  position: absolute;
+  left: 0;
+  max-width: max-content;
+  color: #fff;
+  white-space: nowrap;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-weight: 600;
+  line-height: 1.25;
+  text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000;
+  will-change: transform;
+}
+
+.bililivebar-danmaku.is-fixed {
+  top: auto;
+  text-align: center;
+}
+
+.bililivebar-danmaku-emote {
+  width: auto;
+  height: 1.35em;
+  margin: 0 0.08em;
+  vertical-align: -0.25em;
+  object-fit: contain;
+}
+
+.bililivebar-danmaku-emote.is-large {
+  height: 2.15em;
+  vertical-align: -0.65em;
+}
+
+/* 原生菜单必须盖住历史视频层，回退后全屏、网页全屏等按钮才能继续操作。 */
+#web-player-controller-wrap-el,
+.web-player-controller-wrap,
+[class*="web-player-controller-wrap"],
+[class*="player-controller-wrap"] {
+  position: absolute !important;
+}
+
+#web-player-controller-wrap-el,
+.web-player-controller-wrap,
+.web-player-controller,
+[class*="web-player-controller-wrap"],
+[class*="player-controller-wrap"],
+.bililivebar-player-host .fullscreen-danmaku-container,
+.bililivebar-player-host #web-player__bottom-bar__container,
+.bililivebar-player-host [class*="danmaku-input"],
+.bililivebar-player-host [class*="danmu-input"],
+.bililivebar-player-host [class*="barrage-input"],
+.bililivebar-player-host [class*="send-danmaku"],
+.bililivebar-player-host [class*="send-danmu"],
+.bililivebar-player-host [class*="danmaku-send"],
+.bililivebar-player-host [class*="danmu-send"],
+.bililivebar-player-host [class*="barrage-send"] {
+  z-index: 2147483200 !important;
+  pointer-events: auto !important;
+}
+
+.bililivebar-controls,
+.bililivebar-popover {
+  --bs-pink: #fb7299;
+  --bs-pink-light: #ff8daf;
+  --bs-panel: rgba(15, 17, 24, 0.965);
+  --bs-elevated: rgba(28, 30, 40, 0.985);
+  --bs-text: rgba(255, 255, 255, 0.94);
+  --bs-muted: rgba(255, 255, 255, 0.62);
+  --bs-line: rgba(255, 255, 255, 0.12);
+  color: var(--bs-text);
+  font: 12px/1.3 "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  visibility: visible !important;
+}
+
+.bililivebar-controls *,
+.bililivebar-popover * {
+  box-sizing: border-box;
+}
+
+.bililivebar-controls {
+  position: fixed;
+  z-index: 2147483640;
+  inset: auto 18px 22px auto;
+  margin: 0;
+  right: 18px;
+  bottom: 22px;
+  width: min(800px, calc(100vw - 32px));
+  height: 90px;
+  min-width: min(520px, calc(100vw - 8px));
+  min-height: 90px;
+  max-width: calc(100vw - 8px);
+  max-height: 90px;
+  overflow: hidden;
+  resize: horizontal;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 13px;
+  background:
+    radial-gradient(circle at 80% -45%, rgba(251, 114, 153, 0.2), transparent 48%),
+    linear-gradient(145deg, rgba(24, 26, 35, 0.975), rgba(10, 12, 18, 0.965));
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.46), 0 2px 8px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(18px) saturate(1.2);
+  container-type: inline-size;
+}
+
+.bililivebar-controls::before {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  right: 18px;
+  left: 18px;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(251, 114, 153, 0.9), transparent);
+  pointer-events: none;
+}
+
+.bililivebar-controls.is-context-hidden {
+  display: none !important;
+}
+
+.bililivebar-controls.is-closed {
+  display: none !important;
+}
+
+.bililivebar-controls.is-dragging {
+  opacity: 0.9;
+  user-select: none;
+}
+
+.bililivebar-header {
+  display: flex;
+  height: 36px;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px 4px 11px;
+  border-bottom: 1px solid var(--bs-line);
+  background: rgba(255, 255, 255, 0.018);
+  cursor: move;
+  touch-action: none;
+}
+
+.bililivebar-status-pill {
+  display: inline-flex;
+  min-width: 0;
+  max-width: 230px;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.bililivebar-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #858894;
+}
+
+.bililivebar-controls[data-state="recording"] .bililivebar-dot,
+.bililivebar-controls[data-state="connected"] .bililivebar-dot,
+.bililivebar-controls[data-state="buffering"] .bililivebar-dot {
+  background: var(--bs-pink);
+  box-shadow: 0 0 0 3px rgba(251, 114, 153, 0.17);
+}
+
+.bililivebar-controls[data-state="reconnecting"] .bililivebar-dot,
+.bililivebar-controls[data-state="warning"] .bililivebar-dot {
+  background: #ffc66d;
+}
+
+.bililivebar-controls[data-state="error"] .bililivebar-dot {
+  background: #ff6565;
+}
+
+.bililivebar-status-label {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.72);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bililivebar-speed {
+  padding: 3px 7px;
+  flex: 0 0 auto;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.045);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.bililivebar-cache-size {
+  min-width: 0;
+  padding: 3px 7px;
+  overflow: hidden;
+  flex: 0 1 auto;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.035);
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bililivebar-header-spacer {
+  min-width: 4px;
+  flex: 1 1 auto;
+}
+
+.bililivebar-body {
+  height: 53px;
+  padding: 9px 9px 10px;
+}
+
+.bililivebar-control-row {
+  display: flex;
+  height: 34px;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.bililivebar-control-row::-webkit-scrollbar {
+  display: none;
+}
+
+.bililivebar-button,
+.bililivebar-icon-button,
+.bililivebar-choice,
+.bililivebar-settings-action,
+.bililivebar-segmented button {
+  height: 30px;
+  padding: 0 9px;
+  flex: 0 0 auto;
+  border: 1px solid var(--bs-line);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.065);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+}
+
+.bililivebar-button:hover,
+.bililivebar-icon-button:hover,
+.bililivebar-choice:hover,
+.bililivebar-settings-action:hover,
+.bililivebar-segmented button:hover,
+.bililivebar-choice.is-active,
+.bililivebar-segmented button.is-active {
+  border-color: rgba(251, 114, 153, 0.62);
+  background: rgba(251, 114, 153, 0.17);
+}
+
+.bililivebar-button:active,
+.bililivebar-choice:active,
+.bililivebar-settings-action:active {
+  transform: translateY(1px);
+}
+
+.bililivebar-popover :is(button, input, select, textarea):focus-visible,
+.bililivebar-collapse-button:focus-visible,
+.bililivebar-button:focus-visible,
+.bililivebar-choice:focus-visible,
+.bililivebar-settings-action:focus-visible,
+.bililivebar-range:focus-visible,
+.bililivebar-setting-range input:focus-visible {
+  outline: 2px solid rgba(255, 141, 175, 0.74);
+  outline-offset: 2px;
+}
+
+.bililivebar-settings-button {
+  width: 56px;
+  min-width: 56px;
+  height: 28px;
+  padding: 0 6px;
+  border-color: transparent;
+  background: transparent;
+}
+
+.bililivebar-collapse-button {
+  width: 30px;
+  min-width: 30px;
+  height: 28px;
+  padding: 0;
+  border-color: rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  color: rgba(255, 255, 255, 0.84);
+  background: rgba(255, 255, 255, 0.045);
+  display: grid;
+  place-items: center;
+}
+
+.bililivebar-fold-button {
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  padding: 0;
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.62);
+  background: transparent;
+  font-size: 17px;
+}
+
+.bililivebar-danmaku-button {
+  width: 56px;
+  min-width: 56px;
+  height: 28px;
+  padding: 0 6px;
+  border-color: rgba(174, 190, 207, 0.28);
+  background: rgba(139, 153, 170, 0.12);
+}
+
+.bililivebar-danmaku-button.is-off {
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.46);
+  background: transparent;
+}
+
+.bililivebar-collapse-glyph {
+  position: relative;
+  display: block;
+  width: 17px;
+  height: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+}
+
+.bililivebar-collapse-glyph::before {
+  position: absolute;
+  top: 3px;
+  right: 1px;
+  left: 1px;
+  height: 2px;
+  content: "";
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.bililivebar-collapse-glyph::after {
+  position: absolute;
+  right: 4px;
+  bottom: -2px;
+  left: 4px;
+  height: 4px;
+  content: "";
+  border-radius: 999px;
+  background: #9da4b5;
+  box-shadow: 0 0 6px rgba(157, 164, 181, 0.44);
+}
+
+.bililivebar-split-button {
+  display: flex;
+  width: 56px;
+  height: 28px;
+  flex: 0 0 auto;
+}
+
+.bililivebar-rewind-button {
+  width: 36px;
+  min-width: 36px;
+  height: 28px;
+  padding: 0 4px;
+  border-radius: 8px 0 0 8px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+.bililivebar-split-arrow {
+  width: 21px;
+  min-width: 21px;
+  height: 28px;
+  margin-left: -1px;
+  padding: 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--bs-muted);
+  font-size: 10px;
+}
+
+.bililivebar-live-button {
+  width: 56px;
+  min-width: 56px;
+  height: 28px;
+  padding: 0 6px;
+  font-weight: 750;
+  letter-spacing: 0.35px;
+}
+
+.bililivebar-live-button.is-live {
+  border-color: rgba(174, 190, 207, 0.34);
+  color: #e7edf4;
+  background: rgba(139, 153, 170, 0.16);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.025) inset;
+}
+
+.bililivebar-pause-button.is-paused {
+  border-color: rgba(255, 198, 109, 0.62);
+  color: #ffd89a;
+  background: rgba(255, 198, 109, 0.12);
+}
+
+.bililivebar-pause-button,
+.bililivebar-rate-button,
+.bililivebar-quality-button,
+.bililivebar-volume-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  min-width: 56px;
+  height: 28px;
+  padding: 0 6px;
+}
+
+.bililivebar-volume-button .bililivebar-volume-cross,
+.bililivebar-volume-button.is-muted .bililivebar-volume-waves { display: none; }
+.bililivebar-volume-button.is-muted .bililivebar-volume-cross { display: initial; }
+
+.bililivebar-volume-popup {
+  width: 220px;
+  padding: 12px;
+  border: 1px solid var(--bs-line);
+  border-radius: 10px;
+  background: var(--bs-panel);
+}
+
+.bililivebar-volume-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.bililivebar-volume-range {
+  width: 100%;
+  margin: 6px 0 12px;
+  accent-color: #b3bfce;
+  cursor: pointer;
+}
+
+.bililivebar-time {
+  min-width: 48px;
+  flex: 0 0 auto;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+.bililivebar-live-time {
+  color: var(--bs-muted);
+}
+
+.bililivebar-timeline-track {
+  position: relative;
+  display: flex;
+  min-width: 100px;
+  height: 28px;
+  flex: 1 1 240px;
+  align-items: center;
+}
+
+.bililivebar-range {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-width: 0;
+  height: 18px;
+  margin: 0 1px;
+  flex: 1 1 auto;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bililivebar-setting-range[hidden] {
+  display: none !important;
+}
+
+.bililivebar-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(251, 114, 153, 0.95) 0 var(--bs-progress, 100%),
+    rgba(255, 255, 255, 0.19) var(--bs-progress, 100%) 100%
+  );
+}
+
+.bililivebar-range::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  appearance: none;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--bs-pink);
+  box-shadow: 0 2px 8px rgba(251, 114, 153, 0.48);
+}
+
+.bililivebar-menu-button {
+  position: relative;
+  min-width: 51px;
+  padding-right: 20px;
+  white-space: nowrap;
+}
+
+.bililivebar-menu-button::after {
+  position: absolute;
+  top: 50%;
+  right: 7px;
+  content: "⌄";
+  color: var(--bs-muted);
+  font-size: 9px;
+  transform: translateY(-58%);
+}
+
+.bililivebar-quality-button {
+  max-width: 56px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bililivebar-controls.is-collapsed {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 44px;
+  max-height: 44px;
+  overflow: visible;
+  resize: none;
+  border-color: rgba(251, 114, 153, 0.36);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(38, 40, 52, 0.98), rgba(14, 16, 23, 0.98));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(255, 255, 255, 0.035) inset;
+  cursor: move;
+}
+
+.bililivebar-controls.is-collapsed::before,
+.bililivebar-controls.is-collapsed .bililivebar-status-pill,
+.bililivebar-controls.is-collapsed .bililivebar-speed,
+.bililivebar-controls.is-collapsed .bililivebar-cache-size,
+.bililivebar-controls.is-collapsed .bililivebar-header-spacer,
+.bililivebar-controls.is-collapsed .bililivebar-live-button,
+.bililivebar-controls.is-collapsed .bililivebar-danmaku-button,
+.bililivebar-controls.is-collapsed .bililivebar-settings-button,
+.bililivebar-controls.is-collapsed .bililivebar-fold-button,
+.bililivebar-controls.is-collapsed .bililivebar-body {
+  display: none;
+}
+
+.bililivebar-controls.is-collapsed .bililivebar-header {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  cursor: move;
+}
+
+.bililivebar-controls.is-collapsed .bililivebar-collapse-button {
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 13px;
+  color: #fff;
+  background: transparent;
+  cursor: move;
+  touch-action: none;
+}
+
+.bililivebar-controls.is-collapsed .bililivebar-collapse-glyph {
+  width: 22px;
+  height: 10px;
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.bililivebar-controls.is-collapsed .bililivebar-collapse-glyph::before {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  left: 1px;
+  height: 2px;
+  content: "";
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.bililivebar-controls.is-collapsed .bililivebar-collapse-glyph::after {
+  right: 6px;
+  left: 6px;
+  bottom: -3px;
+  height: 4px;
+  background: #aeb8c6;
+  box-shadow: 0 0 8px rgba(174, 184, 198, 0.58);
+}
+
+.bililivebar-popover {
+  position: fixed;
+  z-index: 2147483647;
+  inset: auto;
+  margin: 0;
+  padding: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  color: var(--bs-text);
+  background: var(--bs-elevated);
+  box-shadow: 0 14px 42px rgba(0, 0, 0, 0.52);
+  backdrop-filter: blur(18px);
+}
+
+.bililivebar-popover:not(:popover-open):not(.is-open) {
+  display: none;
+}
+
+.bililivebar-popover.is-open {
+  display: block;
+}
+
+.bililivebar-choice-popup {
+  min-width: 105px;
+}
+
+.bililivebar-seek-popup {
+  width: min(300px, calc(100vw - 16px));
+  max-height: calc(100vh - 16px);
+  overflow-y: auto;
+  padding: 10px;
+}
+.bililivebar-seek-heading,
+.bililivebar-seek-editor,
+.bililivebar-seek-editor label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bililivebar-seek-heading { justify-content: space-between; margin-bottom: 6px; }
+.bililivebar-seek-editor { justify-content: space-between; margin-top: 8px; }
+.bililivebar-seek-number {
+  width: 78px;
+  height: 28px;
+  padding: 3px 5px;
+  border: 1px solid var(--bs-line);
+  border-radius: 5px;
+  background: var(--bs-panel);
+  color: var(--bs-text);
+  font: inherit;
+  color-scheme: dark;
+}
+.bililivebar-seek-presets { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-top: 5px; }
+.bililivebar-seek-presets .bililivebar-button { min-width: 0; padding: 0 2px; }
+
+.bililivebar-quality-popup {
+  min-width: 148px;
+  max-height: min(420px, calc(100vh - 16px));
+  overflow-y: auto;
+}
+
+.bililivebar-choice {
+  display: block;
+  width: 100%;
+  height: 30px;
+  margin: 1px 0;
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.84);
+  background: transparent;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.bililivebar-choice.is-active {
+  color: #fff;
+}
+
+.bililivebar-settings-panel {
+  width: min(410px, calc(100vw - 16px));
+  max-height: min(620px, calc(100vh - 16px));
+  padding: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(255, 255, 255, 0.24) transparent;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
+
+.bililivebar-context-menu {
+  min-width: 154px;
+  padding: 5px;
+}
+
+.bililivebar-context-action {
+  display: block;
+  width: 100%;
+  height: 31px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 7px;
+  color: rgba(255, 255, 255, 0.86);
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bililivebar-context-action:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.bililivebar-context-action.is-danger {
+  color: #ff9da8;
+}
+
+.bililivebar-settings-head {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  display: flex;
+  height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 13px;
+  border-bottom: 1px solid var(--bs-line);
+  background: rgba(25, 27, 36, 0.98);
+}
+
+.bililivebar-icon-button {
+  width: 27px;
+  height: 27px;
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.bililivebar-setting-section {
+  margin: 10px;
+  padding: 13px;
+  border: 1px solid rgba(181, 198, 222, 0.16);
+  border-radius: 10px;
+  background: rgba(181, 198, 222, 0.035);
+}
+
+.bililivebar-setting-section h3 {
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(181, 198, 222, 0.14);
+  color: #cbd9ee;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.5px;
+}
+
+.bililivebar-setting-note {
+  margin: 4px 0 0;
+  color: var(--bs-muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.bililivebar-setting-group {
+  margin-bottom: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--bs-line);
+}
+
+.bililivebar-playback-info {
+  margin-top: 8px;
+  border-top: 1px solid var(--bs-line);
+}
+
+.bililivebar-playback-info summary {
+  padding: 10px 0 3px;
+  cursor: pointer;
+}
+
+.bililivebar-playback-info dl {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 7px 12px;
+  margin: 10px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.bililivebar-playback-info dt { color: var(--bs-muted); }
+.bililivebar-playback-info dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+
+.bililivebar-setting-toggle,
+.bililivebar-setting-row,
+.bililivebar-setting-range-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.bililivebar-setting-select {
+  min-width: 112px;
+  height: 28px;
+  padding: 0 25px 0 9px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 7px;
+  color: var(--bs-text);
+  background: #242733;
+  color-scheme: dark;
+  font: inherit;
+  cursor: pointer;
+}
+
+.bililivebar-setting-select option {
+  color: #f3f4f7;
+  background: #242733;
+}
+
+.bililivebar-setting-toggle {
+  min-height: 33px;
+  cursor: pointer;
+}
+
+.bililivebar-setting-copy {
+  display: grid;
+  gap: 2px;
+}
+
+.bililivebar-setting-copy strong {
+  font-weight: 500;
+}
+
+.bililivebar-setting-copy small {
+  max-width: 260px;
+  color: var(--bs-muted);
+  font-size: 10px;
+}
+
+.bililivebar-setting-toggle input {
+  width: 31px;
+  height: 17px;
+  flex: 0 0 auto;
+  appearance: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition: background 140ms ease;
+}
+
+.bililivebar-setting-toggle input::before {
+  display: block;
+  width: 13px;
+  height: 13px;
+  margin: 2px;
+  content: "";
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 140ms ease;
+}
+
+.bililivebar-setting-toggle input:checked {
+  background: var(--bs-pink);
+}
+
+.bililivebar-setting-toggle input:checked::before {
+  transform: translateX(14px);
+}
+
+.bililivebar-setting-row {
+  min-height: 36px;
+}
+
+.bililivebar-setting-choice-row {
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.bililivebar-setting-choice-row > span {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.bililivebar-playback-settings .bililivebar-segmented {
+  width: 180px;
+  max-width: 100%;
+}
+
+.bililivebar-playback-settings .bililivebar-segmented button {
+  flex: 1 0 auto;
+}
+
+.bililivebar-segmented {
+  display: flex;
+  min-width: 0;
+}
+
+.bililivebar-segmented button {
+  height: 27px;
+  margin-left: -1px;
+  padding: 0 8px;
+  border-radius: 0;
+  color: var(--bs-muted);
+  background: rgba(255, 255, 255, 0.035);
+  white-space: nowrap;
+}
+
+.bililivebar-setting-choice-row .bililivebar-segmented {
+  max-width: 100%;
+  margin-left: auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.bililivebar-setting-choice-row .bililivebar-segmented::-webkit-scrollbar {
+  display: none;
+}
+
+.bililivebar-segmented button:first-child {
+  margin-left: 0;
+  border-radius: 7px 0 0 7px;
+}
+
+.bililivebar-segmented button:last-child {
+  border-radius: 0 7px 7px 0;
+}
+
+.bililivebar-segmented button.is-active {
+  position: relative;
+  color: #fff;
+}
+
+.bililivebar-manual-danmaku {
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  transition: opacity 120ms ease;
+}
+
+.bililivebar-manual-danmaku.is-disabled {
+  opacity: 0.4;
+}
+
+.bililivebar-setting-range {
+  display: grid;
+  gap: 5px;
+  padding: 5px 0;
+}
+
+.bililivebar-setting-range output {
+  color: var(--bs-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.bililivebar-setting-range input {
+  width: 100%;
+  height: 14px;
+  margin: 0;
+  accent-color: var(--bs-pink);
+  cursor: pointer;
+}
+
+.bililivebar-storage-description {
+  margin: 10px 0;
+  padding: 8px 10px;
+  border: 1px solid var(--bs-line);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.025);
+  overflow-wrap: anywhere;
+  color: var(--bs-muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.bililivebar-setting-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.bililivebar-settings-action {
+  min-width: 0;
+  height: auto;
+  min-height: 34px;
+  padding: 7px 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: normal;
+}
+
+.bililivebar-settings-action[aria-pressed="true"] {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.bililivebar-button:disabled,
+.bililivebar-settings-action:disabled,
+.bililivebar-manual-danmaku input:disabled,
+.bililivebar-manual-danmaku button:disabled {
+  cursor: not-allowed;
+}
+
+@container (max-width: 630px) {
+  .bililivebar-control-row {
+    gap: 5px;
+  }
+
+  .bililivebar-live-button,
+  .bililivebar-pause-button,
+  .bililivebar-rate-button,
+  .bililivebar-quality-button,
+  .bililivebar-volume-button,
+  .bililivebar-split-button {
+    width: 48px;
+    min-width: 48px;
+  }
+
+  .bililivebar-rewind-button {
+    width: 28px;
+    min-width: 28px;
+  }
+
+  .bililivebar-status-pill {
+    max-width: 130px;
+  }
+
+  .bililivebar-timeline-track {
+    flex-basis: 150px;
+  }
+}
+
+@media (max-width: 540px) {
+  .bililivebar-controls {
+    right: 4px;
+    bottom: 6px;
+    width: calc(100vw - 8px);
+    min-width: calc(100vw - 8px);
+  }
+
+  .bililivebar-status-pill {
+    max-width: 105px;
+  }
+}
+
+:fullscreen .bililivebar-controls,
+:fullscreen .bililivebar-popover,
+:-webkit-full-screen .bililivebar-controls,
+:-webkit-full-screen .bililivebar-popover {
+  z-index: 2147483647;
+}

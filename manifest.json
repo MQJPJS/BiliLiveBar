@@ -1,0 +1,72 @@
+{
+  "manifest_version": 3,
+  "minimum_chrome_version": "116",
+  "name": "B站直播进度条",
+  "version": "0.11.18",
+  "description": "为 Bilibili 直播增加可回看的进度条，方便进行时间轴对轴以及直播回看。",
+  "permissions": ["storage", "unlimitedStorage", "tabs", "alarms"],
+  "host_permissions": [
+    "https://api.live.bilibili.com/*",
+    "https://api.bilibili.com/*",
+    "https://*.bilibili.com/*",
+    "https://*.bilivideo.com/*",
+    "https://*.bilivideo.cn/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://live.bilibili.com/*"],
+      "js": ["src/bridge-main.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    },
+    {
+      "matches": ["https://live.bilibili.com/*"],
+      "js": [
+        "vendor/shaka-player.compiled.js",
+        "src/core/hls.js",
+        "src/core/protocol.js",
+        "src/core/media.js",
+        "src/core/time.js",
+        "src/core/buffer.js",
+        "src/core/lanes.js",
+        "src/core/danmaku-style.js",
+        "src/core/timeline.js",
+        "src/core/runtime.js",
+        "src/core/native-controls.js",
+        "src/content/storage-client.js",
+        "src/content/hls-recorder.js",
+        "src/content/danmaku-client.js",
+        "src/content/replay-player.js",
+        "src/content/ui.js",
+        "src/content/index.js"
+      ],
+      "css": ["src/content/bililivebar.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "storage.html",
+        "src/storage-backend.js",
+        "src/storage-frame.js"
+      ],
+      "matches": ["https://live.bilibili.com/*"]
+    },
+    {
+      "resources": ["src/content/bililivebar.css"],
+      "matches": ["https://*.bilibili.com/*"]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_title": "BiliLiveBar"
+  }
+}

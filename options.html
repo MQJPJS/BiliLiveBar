@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BiliLiveBar 设置</title>
+    <link rel="stylesheet" href="src/options.css">
+  </head>
+  <body>
+    <main>
+      <header class="page-header"><span class="brand">BiliLiveBar</span><h1>设置</h1></header>
+      <div class="settings-grid">
+      <section id="setup-guide" class="card onboarding" hidden>
+        <h2>首次设置 · 选择缓存位置</h2>
+        <p class="hint">选择缓存文件夹或浏览器内部存储。未设置时使用内部存储。</p>
+        <p class="hint">默认退出清理；需要保留时，可在“退出处理”中关闭。</p>
+      </section>
+      <section class="card storage-card">
+        <h2>缓存位置</h2>
+        <p id="storage-status" class="status">正在读取…</p>
+        <p class="hint">默认保存在浏览器内部。指定文件夹仅存视频，弹幕与索引仍在扩展数据库。</p>
+        <div class="actions">
+          <button id="choose-directory" type="button" title="将后续视频分片写入指定文件夹">选择缓存文件夹</button>
+          <button id="reauthorize" type="button" class="secondary" title="恢复指定缓存文件夹的读写权限" hidden>重新授权</button>
+          <button id="use-internal" type="button" class="secondary" title="将后续视频分片写入扩展 OPFS">浏览器内部存储</button>
+        </div>
+        <label class="range-setting" title="达到上限后自动删除最旧缓存；0 表示不限制">
+          <span>单次直播缓存上限</span>
+          <output id="max-cache-size-value">不限</output>
+          <input id="max-cache-size" type="range" min="0" max="100" step="0.5" value="0" title="单次直播缓存上限">
+        </label>
+        <p class="hint">满额清理旧缓存，无法安全清理则停止录制；0 为不限。</p>
+      </section>
+
+      <section class="card">
+        <h2>悬浮窗显示</h2>
+        <label class="toggle">
+          <input id="show-panel-fullscreen" type="checkbox" title="控制浏览器全屏中的悬浮窗">
+          <span>浏览器全屏时显示</span>
+        </label>
+        <label class="toggle">
+          <input id="show-panel-web-fullscreen" type="checkbox" title="控制 B 站网页全屏中的悬浮窗">
+          <span>网页全屏时显示</span>
+        </label>
+        <p class="hint">图标切换折叠，拖动可移动。右键关闭后，刷新直播页恢复。</p>
+      </section>
+
+      <section class="card">
+        <h2>退出处理</h2>
+        <label class="toggle">
+          <input id="auto-clear" type="checkbox" title="退出直播页时清空本次缓存">
+          <span>离开直播页后清空本次缓存</span>
+        </label>
+        <p class="hint">各页面独立清理。停用扩展时无法清理，重新启用后补清；目录权限失效需重新授权。</p>
+      </section>
+
+      <section class="card danger-zone">
+        <h2>缓存管理</h2>
+        <p id="usage" class="hint"></p>
+        <p id="cleanup-status" class="hint" role="status"></p>
+        <div class="actions">
+          <button id="retry-cleanup" type="button" class="secondary" title="重试已关闭页面的缓存清理，不删除仍在观看的会话">重试退出清理</button>
+          <button id="clear-all" type="button" class="danger" title="永久删除全部视频和弹幕缓存">清空全部缓存</button>
+        </div>
+      </section>
+      </div>
+      <p id="message" role="status" aria-live="polite"></p>
+    </main>
+    <script src="src/storage-backend.js"></script>
+    <script src="src/options.js"></script>
+  </body>
+</html>

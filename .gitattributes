@@ -1,0 +1,3 @@
+* text=auto eol=lf
+*.zip binary
+vendor/shaka-player.compiled.js -text
